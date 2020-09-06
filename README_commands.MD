@@ -1,11 +1,12 @@
 #Git Commands 
-	touch README.mD 
-	echo "# facebook" >> README.md
-	git init
-	git add README.md
-	git commit -m "first commit"
-	git remote add origin https://github.com/user_name/git-test.git
-	git push -u origin master
+
+	-touch README.mD 
+	-echo "# facebook" >> README.md
+	-git init
+	-git add README.md
+	-git commit -m "first commit"
+	-git remote add origin https://github.com/user_name/git-test.git
+	-git push -u origin master
 #These commands has connected local repository to the remote repository in Github and made a first commit 
 #Download the laravel package in your directory using command 
 	laravel new facebook 

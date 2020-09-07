@@ -205,7 +205,35 @@
     and changed it to 
 	 protected $redirectTo = '/';
 #Setting of Tailwind 
-#	#
+	#install tailwind 
+	npm install tailwindcss
+#	#Go to the resources/sass/app.scss file and add the follwoing lines fo code 
+	#resources/sass/app.scss
+	@import "tailwindcss/base";
+
+	@import "tailwindcss/components";
+
+	@import "tailwindcss/utilities";
+#	# execute the following command to generate tailwind.config.js 
+	npx tailwindcss init 
+#	# Edit the webpack.mix.js 
+	# Edit it as folllwoing 
+	const mix = require('laravel-mix');
+	const tailwindcss = require('tailwindcss');
+
+	mix.js('resources/js/app.js', 'public/js')
+		.sass('resources/sass/app.scss', 'public/css')
+		.options({
+			processCssUrls: false,
+			postCss: [tailwindcss('./tailwind.config.js')],
+		});
+#	# npm run dev 
+	#This command will compile the tailwind utilities
+#	# check if tailwind is working 
+	#for example go to views/layout/app.blade.php 
+	<body class="bg-gray-400"> 
+	#I found it working congratulation 
+	
 
 
 

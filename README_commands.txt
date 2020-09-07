@@ -71,6 +71,142 @@
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,		
 		#see the last line of code 
+#		# Check all the active routes in laravel 		
+		 php artisan route:list
+
+#Add the Laravel ui package so that you can use the buit in ui 
+		#install ui 
+		composer require laravel/ui
+		# add vue as ui frontend 
+		php artisan ui vue --auth 
+
+#install the dependencies packages 
+		npm install 
+		#compile them 
+		npm run dev 
+		#If there is success on compiling. You have started the basic settings of vuejs. 
+
+#Set up a controller 
+#Now lets start creating the app.First you create the frontend Compiler 
+	php artisan make:controller AppController 
+	#Create an index function on it as following 
+	 //
+    public function index(){
+       
+        return view('home');
+    }
+
+#	#change the route file web.php as following 
+	#remove the welcome route and welcome.blade.php 
+	// Route::get('/', function () {
+		//     return view('welcome');
+		// });
+
+		Auth::routes();
+	#remove the home route 
+		// Route::get('/home', 'HomeController@index')->name('home');
+	#Add the following route 
+	Route::get('{any}', 'AppController@index')
+			->where('any', '.*') // This means any route which can start with . or any 
+			->middleware('auth') // here we use auth as middleware 
+			->name('home');     // here we call the route as home 
+
+#Set up for Vue.js 
+#	#Edit the home.blade.php file 
+	#Write the following lines 
+	@extends('layouts.app')
+	@section('content')
+	<App></App>
+	@endsection
+
+#	#Edit the app.js file as following 
+	Edit the resources/js/app.js file and write only the following lines 
+	/**
+	* First we will load all of this project's JavaScript dependencies which
+	* includes Vue and other libraries. It is a great starting point when
+	* building robust, powerful web applications using Vue and Laravel.
+	*/
+#	#app.js 
+	import Vue from 'vue';
+	import router from './router';
+	import App from './components/App';	
+
+	require('./bootstrap');	
+	const app = new Vue({
+		el: '#app',
+	
+		components: {
+			App
+		},
+	
+		router,
+	});
+#	#install vue router 
+	npm install vue-router  --save-dev 
+	npm run dev 
+
+#	#create a router.js file: resources/router.js and add the following lines of code 
+	#This is the vue-router file and we write here the routes. 
+	:router.js
+		import Vue from 'vue';
+		import VueRouter from 'vue-router';
+		import Start from './views/Start';
+		
+		Vue.use(VueRouter);
+		
+		export default new VueRouter({
+		mode: 'history',
+		
+		routes: [
+			{
+			path: '/', 
+			name: 'home', 
+			component: Start,
+			}
+		]
+		});
+#	# The component start does exits yet . It should be the start component . So we crete it now . 
+	#Create a vie directory inside js and then a Start.vue file inside it . 
+#	# js/views/Start.vue 
+		<template>
+		<div>asdf</div>
+		</template>
+		
+		<script>
+			export default {
+				name: "Start"
+			}
+		</script>
+		
+		<style scoped>
+		
+		</style>	
+#	# Finally create a  App.vue component . this is the main componet 
+	#components/App.vue 
+	<template>
+		<div>Start
+		<router-view/></router-view>
+		</div>
+	</template>
+	
+	<script>
+		export default {
+			name: "App"
+		}
+	</script>
+	
+	<style scoped>
+	
+	</style>
+	..
+#change the redirect to home as '/'
+	# I searched all
+	protected $redirectTo = RouteServiceProvider::HOME;
+    and changed it to 
+	 protected $redirectTo = '/';
+#Setting of Tailwind 
+#	#
+
 
 
 

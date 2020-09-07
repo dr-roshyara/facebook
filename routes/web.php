@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Auth::routes(); 
+
+// Route::get('/home', 'HomeController@index')->name('home');
+Route::get('{any}', 'AppController@index') 
+    ->where('any', '.*') // This means any route which can start with . or any 
+    ->middleware('auth') // here we use auth as middleware 
+    ->name('home');     // here we call the route as home 
